@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Fetch different resources</title>
+</head>
+<body>
+	<div id="content"></div>
+</body>
+<script>
+let url = 'https://eloquentjavascript.net/author';
+let types = [	'text/plain',
+				'text/html',
+				'application/json',
+				'application/rainbows+unicorns'];
+
+
+async function showTypes () {
+	
+	for (let type of types) {
+		let p = document.createElement('p');
+		p.style = 'border: 1px solid';
+		try {
+			let resp = await fetch(url, {headers: {Accept: type}});
+			let text = await resp.text(),
+				status =  resp.status,
+				tp = resp.headers.get('content-type');
+			console.log(`status: ${ status }, type: ${ tp }, content: ${ text }`);
+			document.querySelector('#content').appendChild(p);
+			if (type == 'application/json') {
+				let j = JSON.parse(text); 
+				p.textContent = `Hey there! I'm ${j.name}, and I work as a programmer.\n
+								If you want to hire one like me, please e-mail to ${j.email}\n
+								or check out my website ${j.website} before that.`; 
+			}
+			else p.innerHTML = text;
+		}
+		catch(e) {
+			console.log('Look this error: ', e);
+		}
+	}
+}
+showTypes();
+
+//////////////////////////////////////////////
+// Using promises instead of async functions //
+//////////////////////////////////////////////
+// for (let type of types) {
+// 	fetch(url, {headers: {Accept: type}}).then(r => {
+// 		console.log(r.status);
+// 		console.log(r.headers.get("content-type"));
+// 		return r.text();
+// 	})
+// 	.then(text => {
+// 		console.log(text);
+// 		let p = document.createElement('p');
+// 		p.innerHTML = text;
+// 		document.querySelector('#content').appendChild(p);
+// 	})
+// 	.catch(error => console.log(error));
+// } 
+
+</script>
+</html>
