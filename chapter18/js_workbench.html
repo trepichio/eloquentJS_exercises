@@ -1,0 +1,29 @@
+<!doctype html>
+<script src="./code/18_http.js"></script>
+
+<textarea id="code">return "hi";</textarea>
+<button id="button">Run</button>
+<pre id="output"></pre>
+
+<script>
+let button = document.querySelector('#button');
+
+button.addEventListener('click', e => {
+let code = document.querySelector('#code').value,
+	output = document.querySelector('#output');	
+	console.log(code);
+	try{
+		let callback = new Function(code)();
+		let node = document.createTextNode(String(callback) + '\n');
+		output.appendChild(node);
+		// Or just this:
+		// output.textContent = String(callback);
+	}
+	catch(e) {
+		let node = document.createTextNode(`Error: ${e}\n`);
+		output.appendChild(node);
+		// Or just this:
+		// output.textContent = `Error: ${e}`
+	}
+})
+</script>
