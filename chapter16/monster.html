@@ -1,0 +1,113 @@
+<!doctype html>
+<script src="code/16_game.js"></script>
+<script src="code/levels.js"></script>
+
+<link rel="stylesheet" href="css/game.css">
+<style>.monster { background: purple }</style>
+
+<body>
+  <script>
+    const monsterSpeed = 4; // var used on book's solution
+
+    // Complete the constructor, update, and collide methods
+    class Monster {
+      ////////////////////
+      // My constructor //
+      ////////////////////
+/*      constructor(pos, speed, reset) {
+        this.pos = pos;
+        this.speed = speed;
+        this.reset = reset;
+      }
+*/
+      ////////////////////////
+      // book's constructor //
+      ////////////////////////
+      constructor(pos) { this.pos = pos;}
+
+      get type() { return "monster"; }
+      ////////////////////////
+      // My create function //
+      ////////////////////////
+/*      static create(pos) {
+        return new Monster(pos.plus(new Vec(0, -1)), new Vec(-2,0), pos);
+      }*/
+
+      ////////////////////////////
+      // Book's create function //
+      ////////////////////////////
+      static create(pos) {
+        return new Monster(pos.plus(new Vec(0, -1)));
+      }
+
+      /////////////////////////////
+      // My update function      //
+      /////////////////////////////
+/*      update(time, state) {
+        let newPos = this.pos.plus(this.speed.times(time));
+        if (!state.level.touches(newPos, this.size, "wall")) {
+          return new Monster(newPos, this.speed, newPos);
+        } else if (this.reset) {
+          return new Monster(newPos, this.speed.times(-1));
+        }
+      }*/
+
+      ////////////////////////////
+      // Book's update function //
+      ////////////////////////////
+      update(time, state) {
+        let player = state.player;
+        let speed = (player.pos.x < this.pos.x ? -1 : 1) * time * monsterSpeed;
+        let newPos = new Vec(this.pos.x + speed, this.pos.y);
+        if (state.level.touches(newPos, this.size, "wall")) return this;
+        else return new Monster(newPos);
+      }
+
+      /////////////////////////
+      // My collide function //
+      /////////////////////////
+/*      collide(state) {
+        let player = state.player;
+        if (player.pos.y + player.size.y < this.pos.y + 0.5) {
+          state.actors = state.actors.filter(a => a != this);
+          return new State(state.level, state.actors, 'playing');
+        }
+
+        return new State(state.level, state.actors, 'lost');
+      }*/
+
+      /////////////////////////////
+      // Book's collide function //
+      /////////////////////////////
+      collide(state) {
+        let player = state.player;
+        if (player.pos.y + player.size.y < this.pos.y + 0.5) {
+          let filtered = state.actors.filter(a => a != this);
+          return new State(state.level, filtered, state.status);
+        }
+        else {
+          return new State(state.level, state.actors, 'lost');
+        }
+      }
+    }
+
+    Monster.prototype.size = new Vec(1.2, 2);
+
+    levelChars["M"] = Monster;
+
+    runLevel(new Level(`
+..................................
+.################################.
+.#..............................#.
+.#..............................#.
+.#..............................#.
+.#...........................o..#.
+.#..@...........................#.
+.##########..............########.
+..........#..o..o..o..o..#........
+..........#...........M..#........
+..........################........
+..................................
+`), DOMDisplay);
+  </script>
+</body>
