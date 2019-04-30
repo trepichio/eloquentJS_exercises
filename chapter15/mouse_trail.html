@@ -1,0 +1,67 @@
+<!doctype html>
+
+<style>
+  .trail { /* className for the trail elements */
+    position: absolute;
+    height: 6px; width: 6px;
+    border-radius: 3px;
+    background: teal;
+  }
+  body {
+    height: 300px;
+  }
+</style>
+
+<script>
+  /////////////////
+  // My solution //
+  /////////////////
+  let divs = [];
+  for (let i = 0; i < 10; i++) {
+    divs.push(document.createElement('div'));
+    divs[i].className = 'trail';
+    divs[i].style.display = 'none'
+  }
+  
+  window.addEventListener('load', () => {
+    divs.forEach(div => {
+      document.body.appendChild(div)
+    })
+  });
+
+  // let lastX; // Tracks the last observed mouse X position
+  // let lastY; // Tracks the last observed mouse Y position
+  let i = 0;
+  const handleTrail = event => {
+      divs[i].style.top  = (event.clientY - 5) + 'px';
+      divs[i].style.left = (event.clientX - 5) + 'px';
+      divs[i].style.display = 'block';
+      i++;
+      if (i >= divs.length) i = 0;
+
+    // lastX = event.clientX;
+    // lastY = event.clientY;
+  }
+
+  window.addEventListener('mousemove', handleTrail);
+
+  /////////////////////
+  // Book's solution //
+  /////////////////////
+  // let dots = [];
+  // for (let i = 0; i < 12; i++) {
+  //   let node = document.createElement('div');
+  //   node.className = 'trail';
+  //   document.body.appendChild(node);
+  //   dots.push(node);
+  // }
+
+  // let currentDot = 0;
+
+  // window.addEventListener('mousemove', event => {
+  //   let dot = dots[currentDot];
+  //   dot.style.top  = (event.pageY - 3) + 'px';
+  //   dot.style.left = (event.pageX - 3) + 'px';
+  //   currentDot = (currentDot + 1) % dots.length;
+  // });
+</script>
