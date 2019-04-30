@@ -1,0 +1,65 @@
+<!doctype html>
+
+<tab-panel>
+  <div data-tabname="one">Tab one</div>
+  <div data-tabname="two">Tab two</div>
+  <div data-tabname="three">Tab three</div>
+</tab-panel>
+<script>
+  function asTabs(node) {
+	/////////////////
+	// My solution //
+	/////////////////
+/*    let bt;
+    for (let child of node.childNodes) {
+    	if (child.nodeType === Node.ELEMENT_NODE) {
+		    bt = document.createElement('button');
+		    bt.textContent = child.getAttribute('data-tabname');
+		    bt.addEventListener('click', event => {
+				let tabs = node.querySelectorAll(`[data-tabname]`);
+				let selected = node.querySelector(`[data-tabname=${event.target.textContent}]`);
+				let buttons = node.parentNode.querySelectorAll('button');
+		    	
+		    	tabs.forEach(tab => {
+		    		tab.style.display = tab === selected ? '' : 'none'
+		    	});
+
+		    	buttons.forEach(bt => {
+		    		bt.style.color = '';
+		    	});
+		    	event.target.style.color = 'red';
+		    });
+		    document.body.insertBefore(bt, node);
+		    child.style.display = 'none';
+    	}
+    } 
+    node.children[0].style.display = 'block';
+*/    
+
+
+	/////////////////////
+	// Book's solution //
+	/////////////////////
+	let tabs = Array.from(node.children).map(node => {
+		let button = document.createElement('button');
+		button.textContent = node.getAttribute('data-tabname');
+		let tab = {node, button};
+		button.addEventListener('click', () => selectTab(tab));
+		return tab;
+	});
+
+	let tabList = document.createElement("div");
+	for (let { button } of tabs) tabList.appendChild(button);
+	node.insertBefore(tabList, node.firstChild);
+
+	function selectTab (selectedTab) {
+		for (let tab of tabs) {
+			let selected = tab === selectedTab;
+			tab.node.style.display = selected ? "" : "none";
+			tab.button.style.color = selected ? "red" : ""; 
+		} 
+	}
+	selectTab(tabs[0]);
+  }
+  asTabs(document.querySelector("tab-panel"));
+</script>
