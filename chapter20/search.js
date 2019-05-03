@@ -48,17 +48,13 @@ for (let arg of process.argv.slice(3)){
 }
 
 async function search (file) {
-	let stats = await stat(file, (err, data) => {
-		if (err) throw err;
-	})
+	let stats = await stat(file);
 	if (stats.isDirectory()) {
-		let files = await readdir(file, (err, files) => {
-			if (err) throw err;
-		});
+		let files = await readdir(file);
 		for (let f of files) {
 			search(file + '/' + f);	
 		} 
-	} else if (searchTerm.test(await readFile(file, 'utf8', (err, data) => console.log(data)))){
+	} else if (searchTerm.test(await readFile(file, 'utf8'))){
 		console.log(file);
 	}
 }
