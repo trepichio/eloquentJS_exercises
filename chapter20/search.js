@@ -1,7 +1,7 @@
 /////////////////
 // My solution //
 /////////////////
-const {readFileSync, readdirSync}  = require('fs');
+/*const {readFileSync, readdirSync}  = require('fs');
 const [node, file, regex, ...paths] = process.argv;
 const cwd = process.cwd();
 // console.log('CWD:', cwd);
@@ -32,7 +32,36 @@ function searchFiles(files) {
 		}
 	}	
 }
-searchFiles(paths);
+searchFiles(paths);*/
+
+//////////////////////////////
+// My asynchronous solution //
+//////////////////////////////
+const {stat, readFile, readdir} = require('fs').promises;
+
+
+let searchTerm = new RegExp(process.argv[2]);
+if (searchTerm == "/(?:)/") return console.log('Missing a Regular Expression argument');
+
+for (let arg of process.argv.slice(3)){
+	search(arg);
+}
+
+async function search (file) {
+	let stats = await stat(file, (err, data) => {
+		if (err) throw err;
+	})
+	if (stats.isDirectory()) {
+		let files = await readdir(file, (err, files) => {
+			if (err) throw err;
+		});
+		for (let f of files) {
+			search(file + '/' + f);	
+		} 
+	} else if (searchTerm.test(await readFile(file, 'utf8', (err, data) => console.log(data)))){
+		console.log(file);
+	}
+}
 
 /////////////////////
 // Book's solution //
