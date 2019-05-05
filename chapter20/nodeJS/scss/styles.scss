@@ -1,0 +1,85 @@
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+	margin: 0;
+	padding: 0;
+}
+
+*, *::before, *::after {
+	box-sizing: inherit;
+}
+
+body {
+	font-size: 1.6rem;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+} 
+
+textarea, select {
+	font-family: monospace;
+}
+select {
+	font-size: 3rem;
+}
+
+h1 {
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+%button-shared {
+	border-radius: 15%;
+	border: 1px solid #000;
+	background-color: hsl(188,52,70);
+	padding: 0.8rem;
+	color: #000;
+	text-decoration: none;
+	&:hover {
+		background-color: hsl(188,90,90);
+	}
+
+	&::before {
+		margin-right: 1rem;
+	}
+}
+
+.btCreate {
+	@extend %button-shared;
+	&::before {
+		content: '🆕';
+	}
+}
+
+.btUpdate {
+	@extend %button-shared;
+	&::before {
+		content: '💾';
+	}
+}
+
+.btDelete {
+	@extend %button-shared;
+	&::before {
+		content: '💥';
+	}
+}
+
+main {
+	width: 95%;
+	margin: 0 auto;
+}
+
+textarea {
+	width: 100%;
+	height: 400px;
+	margin: 2rem 0 3rem;
+}
+
+.flex-controls {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.flex-btn {
+	display: inline-flex;
+	width: 35%;
+	justify-content: space-between; 
+}
