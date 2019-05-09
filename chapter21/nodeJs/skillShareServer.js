@@ -142,11 +142,30 @@ SkillShareServer.prototype.waitForChanges = function(time) {
 	});
 };
 
+const {readFileSync, writeFile} = require('fs');
+const filePath = './talks.json';
+
 SkillShareServer.prototype.updated = function() {
 	this.version++;
 	let response = this.talkResponse();
 	this.waiting.forEach(resolve => resolve(response));
 	this.waiting = [];
+
+	writeFile(filePath, JSON.stringify(this.talks), (error) => {
+		if (error) throw error;
+		console.log('The file has been saved.')
+	});
 };
 
-new SkillShareServer(Object.create(null)).start(8000);
+function loadTalks () {
+	let json;
+	try{
+		json = JSON.parse(readFileSync(filePath,'utf8'));
+	} catch (e) {
+		json = {};
+	}
+
+	return Object.assign(Object.create(null),json);
+}
+
+new SkillShareServer(loadTalks()).start(8000);	
