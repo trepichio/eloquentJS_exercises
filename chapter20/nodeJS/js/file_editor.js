@@ -94,7 +94,7 @@ btCreate.addEventListener('click', e => {
 				list = text.split('\n');
 			do {
 				if (filename == null) return; 
-				found = list.some(file => filename == file);
+				found = list.includes(filename);
 				if (found) {
 					filename = validateFilename(
 						 prompt(`Filename ${filename} already exists.` +
