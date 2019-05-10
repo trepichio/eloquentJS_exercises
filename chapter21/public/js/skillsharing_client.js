@@ -65,7 +65,8 @@ function elt(type, props, ...children) {
   return dom;
 }
 
-function renderTalk (talk, dispatch) {
+function renderTalk (talk, dispatch, cnc) {
+	let comment_title = `c__${talk.title}`;
 	return elt(
 		'section', {className: "talk"}, 
 		elt('h2', null, talk.title, ' ', elt('button', {
@@ -87,7 +88,8 @@ function renderTalk (talk, dispatch) {
 						  message: form.elements.comment.value});
 				form.reset();
 			}
-		}, elt('input', {type: 'text', name: 'comment'}), ' ',
+		// }, elt('input', {type: 'text', name: 'comment', id: `c__${talk.title}`}), ' ',
+		}, elt('input', {type: 'text', name: 'comment', id: `${comment_title}`, value: `${cnc[comment_title] || ''}`}), ' ',
 		   elt('button', {type: 'submit'}, 'Add comment')));
 }
 
@@ -148,10 +150,15 @@ class SkillShareApp {
 
 	syncState(state) {
 		if (state.talks != this.talks) {
+			let comments_not_commited = Object.create(null);
+			Array.prototype.forEach.call(this.talkDOM.children, (talk) => {
+				let [form] = Array.from(talk.children).filter(e => e.nodeName == "FORM");
+				comments_not_commited[`${form.comment.id}`] = `${form.comment.value}`;
+			});
 			this.talkDOM.textContent = '';
 			for (let talk of state.talks) {
 				this.talkDOM.appendChild(
-					renderTalk(talk, this.dispatch));	
+					renderTalk(talk, this.dispatch, comments_not_commited));	
 			}
 			this.talks = state.talks;
 		}
