@@ -1,5 +1,7 @@
 <!doctype html>
-
+<h1>a ballon which you can shrink or grow until explodes using arrow keys</h1>
+<h1>PRESS <strong>⇵</strong> arrow keys to inflate or deflate this ballon.</h1>
+<h2>Be careful! lol 😆</h2>
 <p>🎈</p>
 
 <script>
@@ -9,7 +11,7 @@
 /*	document.querySelector('p').style.fontSize = '30px';
 	const resizeBalloon = event => {
 	  	let balloon = event.target.querySelector('p');
-	  	let size = parseFloat(balloon.style.fontSize); 
+	  	let size = parseFloat(balloon.style.fontSize);
 	  	if (size >= 210) explode(balloon);
 	  	if (event.key === 'ArrowUp') inflate(balloon, size);
 	  	if (event.key === 'ArrowDown') deflate(balloon, size);
@@ -17,7 +19,7 @@
 	}
 
 	function inflate (balloon, size) {
-		balloon.style.fontSize = size + 10 + 'px' 
+		balloon.style.fontSize = size + 10 + 'px'
 	}
 	function deflate (balloon, size) {
 		balloon.style.fontSize = size - 10 + 'px';
@@ -38,7 +40,7 @@
 	function setSize (newSize) {
 		size = newSize;
 		p.style.fontSize = size + 'px';
-	}	
+	}
 	setSize(20);
 
 	function handleArrow (event) {
