@@ -15,11 +15,12 @@ It depends on what kind of tasks you have to do on daily-basis. You may find out
 
 ## Let's cut the cheese right way!
 
-Following is the contents of the book and I linked each with my own solutions.
+Following below is the contents of the book and I linked each with my own solutions.
 I may have done a little bit more work than asked by the author's book on those exercises I enjoyed doing in that reading time.
 
 Some are ***HTML files*** and can be **viewed directly in the browser**.
-Some are ***JS files*** and you have **copy/download the code and paste/run it in the browser or Node.js environment** to see the output they produce in the console.
+So, use the Devtools of your favourite browser for checking the code.
+Some are ***JS files*** and you might have to **copy/download the code and paste/run it in the browser or Node.js environment** to see the output they produce in the console.
 
 #### Check it out!
 
