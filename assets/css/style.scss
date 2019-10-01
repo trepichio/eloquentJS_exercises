@@ -1,3 +1,7 @@
+---
+---
+
+@import "{{ site-theme }}";
 a {
 	&.anchor {
 		display: inline-block;
@@ -7,8 +11,16 @@ a {
 	}
 }
 
-@import "{{ site-theme }}";
-
+nav {
+  width: max-content;
+  position: fixed;
+  top: 190px;
+  left:50%;
+  margin-left:-675px;
+  text-align: right;
+  column-count: 2;
+  column-gap: 520px;
+}
 
 .page-header {
   color: #ffff;
