@@ -532,7 +532,7 @@ Finally, **try asking for** the media type **application/rainbows+unicorns** and
 <a name="js_workbench-link" style="display: inline-block;position: relative;top: -150px;visibility: hidden;"></a>
 ### A JavaScript workbench
 #### description:
-> **Build an interface that allows people to type and run pieces of JavaScript code.** Put a button next to a <textarea> field that, when pressed, uses the Function constructor we saw in Chapter 10 to wrap the text in a function and call it.
+> **Build an interface that allows people to type and run pieces of JavaScript code.** Put a button next to a \<textarea\> field that, when pressed, uses the Function constructor we saw in Chapter 10 to wrap the text in a function and call it.
 Convert the return value of the function, or any error it raises, to a string and display it below the text field.
 
 [↑ go up to Contents](#contents-link "go to description")
@@ -568,8 +568,9 @@ or tab to the application before you can interact with it with the keyboard.
 > During drawing, the majority of work that our application does happens in **drawPicture**. Creating a new state and updating the rest of the DOM isn’t very expensive, but repainting all the pixels on the canvas is quite a bit of work.
 **Find a way to make the syncState method of PictureCanvas faster** by redrawing only the pixels that actually changed.
 Remember that drawPicture is also used by the save button, so if you change it, either make sure the changes don’t break the old use or create a new version with a different name.
-Also note that changing the size of a <canvas> element, by setting its width
+Also note that changing the size of a \<canvas\> element, by setting its width
 or height properties, clears it, making it entirely transparent again.
+
 [↑ go up to Contents](#contents-link "go to description")
 
 <a name="circles-link" style="display: inline-block;position: relative;top: -150px;visibility: hidden;"></a>
