@@ -13,7 +13,7 @@ It's importante to note that I read the Third Edition, being the latest on the t
 It is a bit hard to grasp some concepts, but you can always revisit some concepts later when need them. However, I tell you that it worths give everything in this book a try at first anyway, because I believe you always learn something at first. It doesn't matter if it is just 10% or 100%. You start doing things, then practice more, and read the hard parts again later and eventually you reach 100% of understanding.
 It depends on what kind of tasks you have to do on daily-basis. You may find out you don't need to get so deep in JS, maths, programming or anything. But, I think it's always cool to learn new things!
 
-## Let's cut the cheese right way!
+## Let's cut to the chase right way!
 
 Following below is the contents of the book and I linked each with my own solutions.
 I may have done a little bit more work than asked by the author's book on those exercises I enjoyed doing in that reading time.
